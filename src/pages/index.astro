@@ -1,0 +1,92 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Welcome to Astro.">
+	<section class="min-h-[100vh] sm:pt-4 md:pt-24 fade-in" id="intro">
+		<div class="sm:p-4 md:pl-4 md:pr-28 leading-7">
+			<p class="py-6 sm:text-3xl md:text-6xl">Introduction</p>
+			<p class="sm:text-base md:text-lg text-justify">
+				CJ Karkut is a passionate web and backend developer with 3 years of
+				hands-on experience building robust and scalable applications. In this
+				short span, he has not only honed expertise in various web technologies
+				but also successfully launched a product that addresses real-world
+				needs. This accomplishment reflects his ability to turn innovative ideas
+				into functional, user-centric solutions. Eager to continue growing in
+				the tech field, CJ is committed to delivering high-quality results and
+				staying at the forefront of industry advancements.
+			</p>
+		</div>
+	</section>
+	<section class="min-h-[100vh] pt-24 fade-in" id="education">
+		<div class="">
+			<p class="p-4 sm:text-3xl md:text-6xl text-center">Education</p>
+			test
+		</div>
+	</section>
+	<section class="min-h-[100vh] pt-24 fade-in" id="work">
+		<div class="">
+			<p class="p-4 sm:text-3xl md:text-6xl text-center">Work</p>
+			test
+		</div>
+	</section>
+	<section class="min-h-[100vh] pt-24 fade-in" id="certifications">
+		<div class="">
+			<p class="p-4 sm:text-3xl md:text-6xl text-center">Certifications</p>
+			test
+		</div>
+	</section>
+	<section class="min-h-[100vh] pt-24 fade-in" id="skills">
+		<div class="">
+			<p class="p-4 sm:text-3xl md:text-6xl text-center">Skills</p>
+			test
+		</div>
+	</section>
+	<section class="min-h-[100vh] pt-24 fade-in" id="projects">
+		<div class="">
+			<p class="p-4 sm:text-3xl md:text-6xl text-center">Projects</p>
+			test
+		</div>
+	</section>
+	<section class="min-h-[100vh] pt-24 fade-in" id="contact">
+		<div class="">
+			<p class="p-4 sm:text-3xl md:text-6xl text-center">Contact</p>
+			test
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.fade-in {
+		opacity: 0;
+		transform: translateY(-40px);
+		transition:
+			opacity 1s ease-out,
+			transform 0.5s ease-out;
+	}
+	.fade-in.show {
+		opacity: 1;
+		transform: translateY(0);
+	}
+</style>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const sections = document.querySelectorAll("section");
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("show");
+					}
+				});
+			},
+			{ threshold: 0.1 }
+		);
+
+		sections.forEach((section) => {
+			observer.observe(section);
+		});
+	});
+</script>

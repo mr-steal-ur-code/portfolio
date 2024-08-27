@@ -1,0 +1,137 @@
+---
+const links = [
+	{ name: "Education", id: "education" },
+	{ name: "Work", id: "work" },
+	{ name: "Certifications", id: "certifications" },
+	{ name: "Skills", id: "skills" },
+	{ name: "Projects", id: "projects" },
+	{ name: "Contact", id: "contact" },
+];
+---
+
+<header id="header" class="shadow fixed top-0 w-full z-50">
+	<div class="pr-4 mx-auto flex justify-between items-center">
+		<div class="text-2xl font-bold text-white">
+			<p data-id="top" class="text-white p-1 cursor-pointer" title="top">
+				<img
+					class="inline-block bg-slate-700 rounded-full"
+					height="80px"
+					width="70px"
+					src="/avatar-200.png"
+				/>
+				Portfolio
+			</p>
+		</div>
+		<nav class="hidden md:flex space-x-6">
+			{
+				links?.map?.((link) => (
+					<p
+						title={link.id}
+						class="cursor-pointer text-slate-400 font-medium text-lg hover:text-white hover:underline transition-all duration-300"
+						data-id={link?.id}
+					>
+						{link?.name}
+					</p>
+				))
+			}
+		</nav>
+		<div class="md:hidden">
+			<button id="menu-button" class="text-white focus:outline-none">
+				<svg
+					class="w-6 h-6"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="3"
+						d="M4 6h16M4 12h16m-7 6h7"></path>
+				</svg>
+			</button>
+		</div>
+	</div>
+	<div id="mobile-menu" class="flex flex-col text-xl bg-slate-950 md:hidden">
+		{
+			links?.map?.((link) => (
+				<p
+					title={link.id}
+					class="cursor-pointer p-2 text-white font-medium hover:text-slate-800"
+					data-id={link?.id}
+				>
+					{link?.name}
+				</p>
+			))
+		}
+	</div>
+</header>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const menuButton = document.getElementById("menu-button");
+		const mobileMenu = document.getElementById("mobile-menu");
+
+		menuButton?.addEventListener("click", () => {
+			if (mobileMenu) {
+				if (mobileMenu.classList.contains("show")) {
+					mobileMenu.style.maxHeight = "0";
+					mobileMenu.classList.remove("show");
+				} else {
+					mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+					mobileMenu.classList.add("show");
+				}
+			}
+		});
+		document.addEventListener("scroll", () => {
+			const header = document.getElementById("header");
+			if (window.scrollY > 5 && header) {
+				header.classList.add("bg-slate-950");
+				header.classList.remove("py-4");
+			} else {
+				header?.classList.remove("bg-slate-950");
+				header?.classList.add("py-4");
+			}
+		});
+		document.addEventListener("click", (e: any) => {
+			if (e?.target?.dataset?.id) {
+				if (e?.target?.dataset?.id === "top") {
+					scrollTo({ top: 0, behavior: "smooth" });
+				} else {
+					scrollToElement(e?.target?.dataset?.id);
+				}
+				if (mobileMenu && mobileMenu.classList.contains("show")) {
+					mobileMenu.style.maxHeight = "0";
+					mobileMenu.classList.remove("show");
+				}
+			}
+		});
+		function scrollToElement(id: string) {
+			var element = document.getElementById(id);
+			if (element) {
+				element.scrollIntoView({ behavior: "smooth" });
+			}
+		}
+	});
+</script>
+
+<style>
+	#header {
+		transition:
+			background 0.5s ease,
+			padding 0.5s ease;
+	}
+	#mobile-menu {
+		max-height: 0;
+		overflow: hidden;
+		transition:
+			max-height 0.4s ease-out,
+			opacity 0.3s ease-out;
+		opacity: 0;
+	}
+
+	#mobile-menu.show {
+		opacity: 1;
+	}
+</style>
