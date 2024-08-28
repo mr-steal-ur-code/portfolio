@@ -73,6 +73,7 @@ const links = [
 	document.addEventListener("astro:page-load", () => {
 		const menuButton = document.getElementById("menu-button");
 		const mobileMenu = document.getElementById("mobile-menu");
+		const toTopButton = document.getElementById("toTopButton");
 
 		menuButton?.addEventListener("click", () => {
 			if (mobileMenu) {
@@ -88,9 +89,11 @@ const links = [
 		document.addEventListener("scroll", () => {
 			const header = document.getElementById("header");
 			if (window.scrollY > 5 && header) {
+				toTopButton?.classList.add("show");
 				header.classList.add("bg-slate-950");
 				header.classList.remove("py-4");
 			} else {
+				toTopButton?.classList.remove("show");
 				header?.classList.remove("bg-slate-950");
 				header?.classList.add("py-4");
 			}
