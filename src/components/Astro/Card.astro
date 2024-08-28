@@ -1,0 +1,77 @@
+---
+type Props = {
+	image?: string;
+	title?: string;
+	link?: string;
+	content?: string;
+	subContent?: string;
+};
+
+const { image, title, link, content, subContent } = Astro.props;
+---
+
+<div id="card" class="card">
+	<img width="245px" src={image} alt={title} />
+	<div class="card-content">
+		<h2 class="text-lg text-white">{title}</h2>
+		{
+			link && (
+				<div class="py-2">
+					<a
+						class="truncate text-sm underline underline-offset-2"
+						target="_blank"
+						href={link}
+					>
+						{link}
+					</a>
+				</div>
+			)
+		}
+		<p class="pt-4 text-sm">{content}</p>
+		<p class="text-blue-500 pt-2">{subContent}</p>
+	</div>
+</div>
+
+<style>
+	.card {
+		display: flex;
+		flex-direction: column;
+		border: 1px solid #ccc;
+		padding: 1.6rem;
+		max-width: 300px;
+		min-height: 350px;
+		border-radius: 8px;
+		background: rgb(9, 9, 38);
+		border-color: rgb(9, 9, 38);
+		transition: transform 0.2s ease-out;
+	}
+
+	.card-content {
+		margin-top: 1rem;
+	}
+</style>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const cards = document.querySelectorAll(".card"); // Select all elements with the "card" class
+
+		cards.forEach((cardEl: any) => {
+			cardEl.addEventListener("mousemove", (e: any) => {
+				const rect = cardEl.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				const centerX = rect.width / 2;
+				const centerY = rect.height / 2;
+
+				// Calculate rotation angles based on mouse position
+				const rotateX = ((y - centerY) / centerY) * 35; // control the strength of the effect
+				const rotateY = ((x - centerX) / centerX) * -35; // control the strength of the effect
+				cardEl.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+			});
+
+			cardEl.addEventListener("mouseleave", () => {
+				cardEl.style.transform = "rotateX(0deg) rotateY(0deg)";
+			});
+		});
+	});
+</script>
