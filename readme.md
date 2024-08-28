@@ -1,4 +1,4 @@
-# Portfolio - [CJ Karkut]
+# Portfolio - CJ Karkut
 
 Welcome to my portfolio! I am a passionate software engineer with expertise in building scalable and efficient web applications using modern technologies. My focus is on creating user-friendly and performant solutions.
 
