@@ -1,62 +1,60 @@
 ---
 type Props = {
+	title: string;
 	image?: string;
-	title?: string;
-	link?: string;
-	content?: string;
-	subContent?: string;
 };
 
-const { image, title, link, content, subContent } = Astro.props;
+const { image, title } = Astro.props;
 ---
 
-<div id="card" class="card">
-	<img width="245px" src={image} alt={title} />
+<div id="card" class="card sm:h-36 md:h-64">
+	{image && <img class="sm:h-[40px] md:h-[70px]" src={image} alt={title} />}
 	<div class="card-content">
-		<h2 class="text-lg text-white">{title}</h2>
-		{
-			link && (
-				<div class="py-2">
-					<a
-						class="truncate text-sm underline underline-offset-2"
-						target="_blank"
-						href={link}
-					>
-						{link}
-					</a>
-				</div>
-			)
-		}
-		<p class="pt-4 text-sm">{content}</p>
-		<p class="text-blue-500 pt-2">{subContent}</p>
+		<h2 class="sm:text-[16px] md:text-[20px] text-white">
+			{title}
+		</h2>
 	</div>
 </div>
 
 <style>
 	.card {
+		opacity: 0;
+		box-shadow: 0px 0px 9px rgb(255, 255, 255);
+		transform: translateY(100px);
+		position: relative;
 		display: flex;
 		flex-direction: column;
-		border: 1px solid #ccc;
 		padding: 1.6rem;
-		max-width: 300px;
-		min-height: 350px;
-		border-radius: 8px;
-		background: rgb(9, 9, 38);
-		border-color: rgb(9, 9, 38);
+		aspect-ratio: 1/1;
+		max-height: 200px;
 		transition: transform 0.2s ease-out;
+		border-radius: 8px;
+		z-index: 1;
+		background: linear-gradient(to bottom, turquoise, #3b82f6);
 	}
 
 	.card-content {
-		margin-top: 1rem;
+		padding-top: 1rem;
+		word-spacing: 100vw;
+		text-align: center;
+	}
+
+	.card.reveal {
+		opacity: 1;
+		transform: translateY(0);
+		transition:
+			opacity 0.6s ease-out,
+			transform 0.4s ease-out;
 	}
 </style>
 
 <script>
 	document.addEventListener("astro:page-load", () => {
-		const cards = document.querySelectorAll(".card"); // Select all elements with the "card" class
+		const cards = document.querySelectorAll(".card");
 
 		cards.forEach((cardEl: any) => {
 			cardEl.addEventListener("mousemove", (e: any) => {
+				if (!cardEl.classList.contains("reveal")) return;
 				const rect = cardEl.getBoundingClientRect();
 				const x = e.clientX - rect.left;
 				const y = e.clientY - rect.top;
@@ -64,8 +62,8 @@ const { image, title, link, content, subContent } = Astro.props;
 				const centerY = rect.height / 2;
 
 				// Calculate rotation angles based on mouse position
-				const rotateX = ((y - centerY) / centerY) * 35; // control the strength of the effect
-				const rotateY = ((x - centerX) / centerX) * -35; // control the strength of the effect
+				const rotateX = ((y - centerY) / centerY) * 55; // control the strength of the effect
+				const rotateY = ((x - centerX) / centerX) * -55; // control the strength of the effect
 				cardEl.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 			});
 

@@ -1,0 +1,90 @@
+---
+type Props = {
+	image?: string;
+	title?: string;
+	link?: string;
+	content?: string;
+	subContent?: string;
+};
+
+const { image, title, link, content, subContent } = Astro.props;
+---
+
+<div id="projectCard" class="project-card">
+	{image && <img width="245px" src={image} alt={title} />}
+	<div class="project-card-content">
+		{title && <h2 class="text-lg text-white">{title}</h2>}
+		{
+			link && (
+				<div class="py-2">
+					{link && (
+						<a
+							class="truncate text-sm underline underline-offset-2"
+							target="_blank"
+							href={link}
+						>
+							{link}
+						</a>
+					)}
+				</div>
+			)
+		}
+		{content && <p class="pt-4 text-sm">{content}</p>}
+		{subContent && <p class="text-blue-500 pt-2">{subContent}</p>}
+	</div>
+</div>
+
+<style>
+	.project-card {
+		display: flex;
+		opacity: 0;
+		flex-direction: column;
+		transform: translateX(-150px);
+		border: 1px solid #ccc;
+		padding: 1.6rem;
+		max-width: 300px;
+		min-height: 350px;
+		border-radius: 8px;
+		background: rgb(9, 9, 38);
+		border-color: rgb(9, 9, 38);
+		transition: transform 0.2s ease-out;
+	}
+
+	.project-card-content {
+		margin-top: 1rem;
+	}
+
+	.project-card.reveal {
+		opacity: 1;
+		transform: translateX(0);
+		transition:
+			opacity 0.6s ease-out,
+			transform 0.6s ease-out;
+	}
+</style>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const cards = document.querySelectorAll(".project-card");
+
+		cards.forEach((cardEl: any) => {
+			cardEl.addEventListener("mousemove", (e: any) => {
+				if (!cardEl.classList.contains("reveal")) return;
+				const rect = cardEl.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				const centerX = rect.width / 2;
+				const centerY = rect.height / 2;
+
+				// Calculate rotation angles based on mouse position
+				const rotateX = ((y - centerY) / centerY) * 55; // control the strength of the effect
+				const rotateY = ((x - centerX) / centerX) * -55; // control the strength of the effect
+				cardEl.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+			});
+
+			cardEl.addEventListener("mouseleave", () => {
+				cardEl.style.transform = "rotateX(0deg) rotateY(0deg)";
+			});
+		});
+	});
+</script>

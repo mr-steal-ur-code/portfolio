@@ -1,5 +1,6 @@
 ---
 import Card from "../components/Astro/Card.astro";
+import ProjectCard from "../components/Astro/ProjectCard.astro";
 import Layout from "../layouts/Layout.astro";
 const skills = [
 	"React",
@@ -25,7 +26,7 @@ const skills = [
 
 <Layout title="CJ's Portfolio">
 	<div class="relative">
-		<section class="min-h-[70vh] sm:pt-4 md:pt-12 fade-in" id="intro">
+		<section class="sm:pt-4 md:pt-12 fade-in py-12" id="intro">
 			<div class="sm:p-4 md:pl-4 md:pr-28 leading-7">
 				<div class="pb-12 flex flex-row justify-evenly text-center text-white">
 					<a
@@ -58,51 +59,95 @@ const skills = [
 				</p>
 			</div>
 		</section>
-		<section class="min-h-[70vh]" id="education">
+
+		<section
+			class="sm:min-h-[20vh] md:min-h-[50vh] flex flex-row flex-wrap gap-4 sm:justify-around md:justify-evenly pt-12"
+		>
+			<Card title="Web Developer" image="/svg/code.svg" />
+			<Card title="Backend Developer" image="/svg/server.svg" />
+			<Card title="Frontend Developer" image="/svg/browser.svg" />
+			<Card title="Software Developer" image="/svg/gear.svg" />
+		</section>
+
+		<section class="min-h-[70vh] pb-12" id="education">
 			<p class="sm:text-3xl md:text-6xl text-center fade-in pt-20 pb-12">
 				Education
 			</p>
 			<div class="vertical-bar">
 				<div class="horizontal-element">
 					<p class="text-white">Self Taught Development</p>
-					<small>2021 - Current</small>
+					<small>2023 - Current</small>
+					<div class="flex flex-row justify-around pt-4">
+						<ul class="pl-6 list-disc">
+							<li>Semantic-UI</li>
+							<li>Tailwind</li>
+							<li>Postmark API</li>
+							<li>Stripe API</li>
+							<li>ViTest</li>
+							<li>Zustand</li>
+						</ul>
+						<ul class="pl-6 list-disc">
+							<li>Astro</li>
+							<li>React</li>
+							<li>React-Dom</li>
+							<li>React-router</li>
+							<li>React-hook-form</li>
+							<li>React-Native</li>
+						</ul>
+					</div>
+				</div>
+				<div class="horizontal-element">
+					<p class="text-white">Mentored Learning</p>
+					<small class="block">2021 - 2023</small>
+					<p>Mentor: Bobby Johnson Senior Full Stack Developer</p>
 					<div class="flex flex-row justify-around pt-4">
 						<ul class="pl-6 list-disc">
 							<li>HTML</li>
 							<li>CSS</li>
 							<li>JavaScript</li>
 							<li>TypeScript</li>
-							<li>Tailwind</li>
+							<li>StencilJs</li>
 						</ul>
 						<ul class="pl-6 list-disc">
-							<li>React-Native</li>
 							<li>Node</li>
 							<li>Express</li>
 							<li>Firebase</li>
 							<li>Cloud Functions</li>
+							<li>Jest</li>
 						</ul>
 					</div>
 				</div>
 				<div class="horizontal-element">
-					<p class="text-white">TexasMcCombs Great Learning</p><small
-						>2023 - 2024</small
+					<p class="text-white">TexasMcCombs Great Learning</p>
+					<small class="block">2023 - 2024</small>
+					<a
+						class="inline-block text-orange-400 hover:text-white duration-300 transition-all text-sm"
+						target="_blank"
+						href="/certs/full-stack-cert.jpg">View Certification</a
 					>
 					<div class="flex flex-row justify-around pt-4">
 						<ul class="pl-6 list-disc">
 							<li>React</li>
 							<li>Bootstrap</li>
 							<li>JQuery</li>
+							<li>Redux</li>
 						</ul>
 						<ul class="pl-6 list-disc">
 							<li>SQL</li>
 							<li>MongoDB</li>
+							<li>Mongoose</li>
 							<li>AWS</li>
 						</ul>
 					</div>
 				</div>
 				<div class="horizontal-element">
 					<p class="text-white">Four Rivers Career Center</p>
-					<small>2009 - 2010</small>
+					<small class="block">2009 - 2010</small>
+					<a
+						class="inline-block text-orange-400 hover:text-white duration-300 transition-all text-sm"
+						target="_blank"
+						href="/certs/four-rivers.jpg">View Certification</a
+					>
 					<div class="flex flex-row justify-around pt-4">
 						<ul class="pl-8 list-disc">
 							<li>CompTIA A+</li>
@@ -112,9 +157,26 @@ const skills = [
 						</ul>
 					</div>
 				</div>
+				<div class="horizontal-element">
+					<p class="text-white">STC High School</p>
+					<small class="block">2006 - 2010</small>
+					<a
+						class="inline-block text-orange-400 hover:text-white duration-300 transition-all text-sm"
+						target="_blank"
+						href="/certs/high-school.jpg">View Diploma</a
+					>
+					<div class="flex flex-row justify-around pt-4">
+						<ul class="pl-8 list-disc">
+							<li>High School Diploma</li>
+						</ul>
+						<ul class="pl-8 list-disc">
+							<li>Vocational Training in Information Technology</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</section>
-		<section class="min-h-[70vh] fade-in" id="work">
+		<section class="min-h-[70vh] fade-in pb-12" id="work">
 			<p class="sm:text-3xl md:text-6xl text-center fade-in pt-20 pb-12">
 				Work
 			</p>
@@ -191,7 +253,7 @@ const skills = [
 				</div>
 			</div>
 		</section>
-		<section class="min-h-[70vh] fade-in" id="certifications">
+		<section class="min-h-[70vh] fade-in pb-12" id="certifications">
 			<p class="sm:text-3xl md:text-6xl text-center pt-20 pb-12">
 				Certifications
 			</p>
@@ -208,6 +270,11 @@ const skills = [
 						</li>
 					</ul>
 					<small class="block pt-4">July 2024</small>
+					<a
+						class="inline-block text-orange-400 hover:text-white duration-300 transition-all"
+						target="_blank"
+						href="/certs/full-stack-cert.jpg">View Certification</a
+					>
 				</div>
 				<div class="horizontal-element">
 					<p class="text-lg text-white">Net+</p><small>CompTIA</small>
@@ -218,6 +285,11 @@ const skills = [
 						</li>
 					</ul>
 					<small class="block pt-4">March 2011</small>
+					<a
+						class="inline-block text-orange-400 hover:text-white duration-300 transition-all"
+						target="_blank"
+						href="/certs/net-plus.jpg">View Certification</a
+					>
 				</div>
 				<div class="horizontal-element">
 					<p class="text-lg text-white">A+</p><small>CompTIA</small>
@@ -228,6 +300,11 @@ const skills = [
 						</li>
 					</ul>
 					<small class="block pt-4">March 2011</small>
+					<a
+						class="inline-block text-orange-400 hover:text-white duration-300 transition-all"
+						target="_blank"
+						href="/certs/a-plus.jpg">View Certification</a
+					>
 				</div>
 			</div>
 		</section>
@@ -240,25 +317,25 @@ const skills = [
 		<section class="min-h-[70vh] fade-in pb-12" id="projects">
 			<p class="sm:text-3xl md:text-6xl text-center pt-20 pb-12">Projects</p>
 			<div class="flex flex-row flex-wrap gap-8 justify-center">
-				<Card
+				<ProjectCard
 					title="Consent Companion web app"
 					image="/images/consent-companion.jpg"
 					link="https://consentcompanion.app"
 					content="A web app designed to streamline body modification consent forms and elevate the client experience."
 					subContent="#React #Firebase #Vite #Node #Tailwind #Stripe #Express"
 				/>
-				<Card
+				<ProjectCard
 					title="Consent Companion Website"
 					image="/images/consent-companion-web.jpg"
 					link="https://consentcompanion.com"
 					content="This is the official website for the Consent Companion web app, optimized for performance and reliability with Astro's SSR (Server-Side Rendering)."
 					subContent="#Astro #Firebase #Tailwind"
 				/>
-				<Card
+				<ProjectCard
 					title="Frequency Finder"
 					image="/images/frequency-finder.jpg"
 					link="https://frequency-finder-e93f7.web.app/"
-					content="A game developed with PhaserJs that challenges players to match random frequencies using keyboard input. The game features a user-friendly menu, an engaging game-over screen, immersive sound effects, and custom-designed assets."
+					content="A game developed with PhaserJs that challenges players to match random frequencies using keyboard input. The game features a user-friendly menu, a game-over screen, sound effects, and custom-designed assets."
 					subContent="#PhaserJs #Firebase"
 				/>
 			</div>
@@ -292,9 +369,36 @@ const skills = [
 						class="text-blue-500 hover:text-blue-300">Join my Discord</a
 					>
 				</div>
+				<div class="w-full md:w-1/2">
+					<h3 class="text-2xl font-semibold text-white mb-4">
+						Connect with Me
+					</h3>
+					<p class="text-white mb-6">Let's grow our connections</p>
+					<div class="flex flex-col gap-4">
+						<p class="text-white relative">
+							<span
+								id="copyTag"
+								class="absolute opacity-0 bg-white text-green-500 p-2 rounded-lg opacity -top-10 left-28 transition-all duration-500"
+								>Copied to Clipboard</span
+							>
+							Discord UserId: <span
+								id="discordId"
+								title="Click to copy"
+								class="text-slate-400 hover:text-blue-500 cursor-pointer"
+							>
+								597177694932697099
+							</span>
+						</p>
+						<a
+							target="_blank"
+							href="https://www.linkedin.com/in/cj-karkut-046147293"
+							class="text-blue-500 hover:text-blue-300">Connect on LinkedIn</a
+						>
+					</div>
+				</div>
 			</div>
 		</section>
-		<footer class="pb-12 flex flex-col items-center text-xl">
+		<footer class="py-12 flex flex-col items-center text-xl">
 			<div>
 				<p>Developed By CJ Karkut</p>
 				<p>
@@ -320,7 +424,23 @@ const skills = [
 		const sections = document.querySelectorAll(".fade-in");
 		const educationElements = document.querySelectorAll(".horizontal-element");
 		const skillElements = document.querySelectorAll(".skill-element");
-		const allElements = [...sections, ...educationElements];
+		const cardEls = document.querySelectorAll(".card");
+		const projectCardEls = document.querySelectorAll(".project-card");
+		const allCardEls = [...cardEls, ...projectCardEls];
+		const allElements = [...sections, ...educationElements, ...skillElements];
+		const discIdEl = document.getElementById("discordId");
+		const copyTagEl = document.getElementById("copyTag");
+
+		discIdEl?.addEventListener("click", () => {
+			navigator.clipboard.writeText(discIdEl.textContent || "").then(() => {
+				if (copyTagEl) {
+					copyTagEl.style.opacity = "1";
+					setTimeout(() => {
+						copyTagEl.style.opacity = "0";
+					}, 2000);
+				}
+			});
+		});
 
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -330,13 +450,22 @@ const skills = [
 					}
 				});
 			},
-			{ threshold: 0.4 }
+			{ threshold: 0.3 }
 		);
-
-		skillElements.forEach((element, index) => {
-			setTimeout(() => {
-				observer.observe(element);
-			}, index * 200);
+		const cardObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry, index) => {
+					if (entry.isIntersecting) {
+						setTimeout(() => {
+							entry.target.classList.add("reveal");
+						}, index * 500);
+					}
+				});
+			},
+			{ threshold: 0.3 }
+		);
+		allCardEls.forEach((element) => {
+			cardObserver.observe(element);
 		});
 
 		allElements.forEach((element) => {
