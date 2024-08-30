@@ -4,11 +4,11 @@ import ProjectCard from "../components/Astro/ProjectCard.astro";
 import Layout from "../layouts/Layout.astro";
 const skills = [
 	"React",
-	"Node",
 	"Typescript",
 	"JavaScript",
+	"Node",
+	"NextJs",
 	"Firebase",
-	"AWS",
 	"Tailwind",
 	"Mongo",
 	"StencilJs",
@@ -19,6 +19,7 @@ const skills = [
 	"ViTest",
 	"SQL",
 	"Express",
+	"AWS",
 	"PWA",
 	"Astro",
 ];
@@ -321,7 +322,11 @@ const skills = [
 		<section class="min-h-[70vh] fade-in" id="skills">
 			<p class="sm:text-3xl md:text-6xl text-center pt-20 pb-12">Skills</p>
 			<div class="flex flex-wrap gap-8 justify-center max-w-[500px] m-auto">
-				{skills.map((skill) => <div class="skill-element">{skill}</div>)}
+				{
+					skills.map((skill) => (
+						<div class="sm:p-2 md:p-4 skill-element">{skill}</div>
+					))
+				}
 			</div>
 		</section>
 		<section class="min-h-[70vh] fade-in pb-12" id="projects">
