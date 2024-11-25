@@ -3,11 +3,12 @@ type Props = {
 	image?: string;
 	title?: string;
 	link?: string;
+	github?: string;
 	content?: string;
 	subContent?: string;
 };
 
-const { image, title, link, content, subContent } = Astro.props;
+const { image, title, link, github, content, subContent } = Astro.props;
 ---
 
 <div id="projectCard" class="project-card">
@@ -24,6 +25,15 @@ const { image, title, link, content, subContent } = Astro.props;
 							href={link}
 						>
 							{link}
+						</a>
+					)}
+					{github && (
+						<a
+							class="mt-2 truncate text-sm underline underline-offset-2"
+							target="_blank"
+							href={github}
+						>
+							{github}
 						</a>
 					)}
 				</div>
