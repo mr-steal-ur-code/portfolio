@@ -27,7 +27,7 @@ const { image, title, link, github, content, subContent } = Astro.props;
 							{link}
 						</a>
 					)}
-					{github && (
+					{github ? (
 						<a
 							class="mt-2 truncate text-sm underline underline-offset-2"
 							target="_blank"
@@ -35,6 +35,8 @@ const { image, title, link, github, content, subContent } = Astro.props;
 						>
 							{github}
 						</a>
+					) : (
+						"Private Repo"
 					)}
 				</div>
 			)
