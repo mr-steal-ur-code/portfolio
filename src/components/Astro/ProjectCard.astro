@@ -89,8 +89,8 @@ const { image, title, link, github, content, subContent } = Astro.props;
 				const centerY = rect.height / 2;
 
 				// Calculate rotation angles based on mouse position
-				const rotateX = ((y - centerY) / centerY) * 55; // control the strength of the effect
-				const rotateY = ((x - centerX) / centerX) * -55; // control the strength of the effect
+				const rotateX = ((y - centerY) / centerY) * 25; // control the strength of the effect
+				const rotateY = ((x - centerX) / centerX) * -25; // control the strength of the effect
 				cardEl.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 			});
 
