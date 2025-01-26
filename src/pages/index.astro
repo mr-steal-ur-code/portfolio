@@ -366,7 +366,7 @@ const skills = [
 				}
 			</div>
 		</section>
-		<section class="min-h-[70vh] fade-in pb-12" id="projects">
+		<section class="min-h-[70vh] pb-12" id="projects">
 			<p class="sm:text-3xl md:text-6xl text-center pt-20 pb-12">Projects</p>
 			<div class="flex flex-row flex-wrap gap-8 justify-center">
 				<ProjectCard
@@ -398,6 +398,22 @@ const skills = [
 					github="https://github.com/mr-steal-ur-code/vanilla-SPA"
 					content="A Single Page Application (SPA) built entirely with Vanilla JavaScript"
 					subContent="#WebComponents #JavaScript #LocalStorage #PokeAPI #WeatherAPI"
+				/>
+				<ProjectCard
+					title="Realm Builder"
+					image="/images/realm-builder.webp"
+					link="https://realm-builder.web.app/"
+					github="https://github.com/mr-steal-ur-code/RPG"
+					content="A Phaser3 game of gathering and building."
+					subContent="#Phaser3 #Firebase #Typescript"
+				/>
+				<ProjectCard
+					title="Last Galaga Invaders"
+					image="/images/last-galaga-invaders.webp"
+					link="https://barrel-shooter-2648e.web.app"
+					github="https://github.com/mr-steal-ur-code/Last-Galaga-Invaders"
+					content="A fixed shooter Phaser3 game featuring waves of enemies and boss rounds."
+					subContent="#Phaser3 #Firebase #Typescript"
 				/>
 				<ProjectCard
 					title="Frequency Finder"
@@ -519,19 +535,21 @@ const skills = [
 					}
 				});
 			},
-			{ threshold: 0.3 }
+			{ threshold: 0.4 }
 		);
 		const cardObserver = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry, index) => {
 					if (entry.isIntersecting) {
+						console.log(`Revealing card: ${entry.target}`);
+
 						setTimeout(() => {
 							entry.target.classList.add("reveal");
 						}, index * 500);
 					}
 				});
 			},
-			{ threshold: 0.3 }
+			{ threshold: 0.4 }
 		);
 		allCardEls.forEach((element) => {
 			cardObserver.observe(element);
