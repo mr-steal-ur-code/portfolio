@@ -2,7 +2,7 @@
 import ProjectCard from "../Astro/ProjectCard.astro";
 ---
 
-<section class="min-h-[70vh]" id="projects">
+<section id="projects">
 	<h2 class="title">Projects</h2>
 
 	<div class="mb-16">
@@ -106,7 +106,7 @@ import ProjectCard from "../Astro/ProjectCard.astro";
 
 	const projectCardObserver = new IntersectionObserver(
 		(entries) => {
-			entries.forEach((entry: any, index) => {
+			entries.forEach((entry: any, _index) => {
 				if (entry.isIntersecting) {
 					const sectionCards = Array.from(
 						entry.target.parentElement.querySelectorAll(".project-card")

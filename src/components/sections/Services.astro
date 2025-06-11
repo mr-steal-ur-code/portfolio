@@ -2,7 +2,7 @@
 import Card from "../Astro/Card.astro";
 ---
 
-<section class="mb-28" id="services">
+<section class="min-h-[40vh] fade-in" id="services">
 	<div class="card-container">
 		<Card title="Web Developer" image="/svg/code.svg" />
 		<Card title="Backend Developer" image="/svg/server.svg" />
@@ -29,6 +29,7 @@ import Card from "../Astro/Card.astro";
 
 	@media (min-width: 401px) and (max-width: 650px) {
 		.card-container {
+			gap: 3rem;
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
