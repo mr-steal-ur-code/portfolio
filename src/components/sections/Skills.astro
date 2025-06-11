@@ -1,0 +1,42 @@
+---
+const skills = [
+	"React",
+	"Typescript",
+	"JavaScript",
+	"Node",
+	"NextJs",
+	"Firebase",
+	"Tailwind",
+	"Mongo",
+	"StencilJs",
+	"Git",
+	"Stripe",
+	"Postmark",
+	"Jest",
+	"ViTest",
+	"SQL",
+	"Express",
+	"AWS",
+	"PWA",
+	"Astro",
+];
+---
+
+<section class="min-h-[70vh] fade-in" id="skills">
+	<h2 class="title">Skills</h2>
+	<div class="flex flex-wrap gap-8 justify-center max-w-[500px] m-auto">
+		{
+			skills.map((skill) => (
+				<div class="sm:p-2 md:p-4 skill-element">{skill}</div>
+			))
+		}
+	</div>
+</section>
+
+<style></style>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const skillElements = document.querySelectorAll(".skill-element");
+	});
+</script>

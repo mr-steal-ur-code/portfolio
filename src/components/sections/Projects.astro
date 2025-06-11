@@ -1,0 +1,126 @@
+---
+import ProjectCard from "../Astro/ProjectCard.astro";
+---
+
+<section class="min-h-[70vh]" id="projects">
+	<h2 class="title">Projects</h2>
+
+	<div class="mb-16">
+		<h3
+			class="text-4xl pb-2 md:text-6xl text-center mb-12 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-800 bg-clip-text text-transparent font-black tracking-widest drop-shadow-2xl relative"
+		>
+			Production Projects
+		</h3>
+		<div class="flex flex-col gap-8 items-center">
+			<ProjectCard
+				title="Spider Lily Website"
+				image="/images/spiderlily.webp"
+				link="https://spiderlily.ink"
+				content="The official website for Spider Lily Ink."
+				subContent="#Astro #React #CSS3 #Netlify"
+			/>
+
+			<ProjectCard
+				title="CJ's Pick List"
+				image="/images/pick-list.webp"
+				link="https://cj-pick-list.web.app/"
+				github="https://github.com/mr-steal-ur-code/CJ-s-Pick-List"
+				content=" A dynamic list-making app that lets you add items, lists, and categorize them. Create recipes that automatically add all ingredients to your list for seamless meal planning and shopping."
+				subContent="#Vite #React #Firebase #Tailwind #Zustand"
+			/>
+
+			<ProjectCard
+				title="Consent Companion web app"
+				image="/images/consent-companion.webp"
+				link="https://consentcompanion.app"
+				content="A web app designed to streamline body modification consent forms and elevate the client experience."
+				subContent="#React #Firebase #Vite #Node #Tailwind #Stripe #Express"
+			/>
+
+			<ProjectCard
+				title="Consent Companion Website"
+				image="/images/consent-companion-web.webp"
+				link="https://consentcompanion.com"
+				content="This is the official website for the Consent Companion web app, optimized for performance and reliability with Astro's SSR (Server-Side Rendering)."
+				subContent="#Astro #Firebase #Tailwind"
+			/>
+		</div>
+	</div>
+	<div class="mb-16">
+		<h3
+			class="text-4xl pb-2 md:text-6xl text-center mb-12 bg-gradient-to-r from-emerald-400 via-green-500 to-teal-600 bg-clip-text text-transparent font-black tracking-widest drop-shadow-2xl relative"
+		>
+			Personal Projects
+		</h3>
+		<div class="flex flex-col gap-8 items-center">
+			<ProjectCard
+				title=" Vanilla SPA - Pokemon Search"
+				image="/images/vanillaspa.webp"
+				link="https://vanilla-spa-406f4.web.app/"
+				github="https://github.com/mr-steal-ur-code/vanilla-SPA"
+				content="A Single Page Application (SPA) built entirely with Vanilla JavaScript"
+				subContent="#WebComponents #JavaScript #LocalStorage #PokeAPI #WeatherAPI"
+			/>
+
+			<ProjectCard
+				title="E-Commerce web app"
+				image="/images/ecommerce.webp"
+				link="https://ecommerce-client-5e29f.web.app/"
+				github="https://github.com/mr-steal-ur-code/ecommerce-client"
+				content="My E-Commerce web app. Utilizes api fetching and state management."
+				subContent="#React #Redux #Firebase #Node #Tailwind"
+			/>
+
+			<ProjectCard
+				title="Last Galaga Invaders"
+				image="/images/last-galaga-invaders.webp"
+				link="https://barrel-shooter-2648e.web.app"
+				github="https://github.com/mr-steal-ur-code/Last-Galaga-Invaders"
+				content="A fixed shooter Phaser3 game featuring waves of enemies and boss rounds."
+				subContent="#Phaser3 #Firebase #Typescript"
+			/>
+
+			<ProjectCard
+				title="Frequency Finder"
+				image="/images/frequency-finder.webp"
+				link="https://frequency-finder-e93f7.web.app/"
+				github="https://github.com/mr-steal-ur-code/frequency-finder"
+				content="A game developed with PhaserJs that challenges players to match random frequencies using keyboard input. The game features a user-friendly menu, a game-over screen, sound effects, and custom-designed assets."
+				subContent="#PhaserJs #Firebase"
+			/>
+
+			<ProjectCard
+				title="Realm Builder (WIP) "
+				image="/images/realm-builder.webp"
+				link="https://realm-builder.web.app/"
+				github="https://github.com/mr-steal-ur-code/RPG"
+				content="A Phaser3 game of gathering and building."
+				subContent="#Phaser3 #Firebase #Typescript"
+			/>
+		</div>
+	</div>
+</section>
+
+<script>
+	const projectCardEls = document.querySelectorAll(".project-card");
+
+	const projectCardObserver = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry: any, index) => {
+				if (entry.isIntersecting) {
+					const sectionCards = Array.from(
+						entry.target.parentElement.querySelectorAll(".project-card")
+					);
+					const cardIndex = sectionCards.indexOf(entry.target);
+					entry.target.style.transitionDelay = `${cardIndex * 0.2}s`;
+					entry.target.classList.add("reveal");
+				}
+			});
+		},
+		{ threshold: 0.4 }
+	);
+
+	projectCardEls.forEach((element) => {
+		projectCardObserver.observe(element);
+	});
+</script>

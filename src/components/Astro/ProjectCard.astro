@@ -12,7 +12,7 @@ const { image, title, link, github, content, subContent } = Astro.props;
 ---
 
 <div id="projectCard" class="project-card">
-	{image && <img width="245px" src={image} alt={title} />}
+	{image && <img width="200px" height="120px" src={image} alt={title} />}
 	<div class="project-card-content">
 		{title && <h2 class="text-lg text-white">{title}</h2>}
 		{
@@ -36,7 +36,7 @@ const { image, title, link, github, content, subContent } = Astro.props;
 							{github}
 						</a>
 					) : (
-						"Private Repo"
+						<h3 class="text-red-400">Private Repo</h3>
 					)}
 				</div>
 			)
@@ -45,25 +45,82 @@ const { image, title, link, github, content, subContent } = Astro.props;
 		{subContent && <p class="text-blue-500 pt-2">{subContent}</p>}
 	</div>
 </div>
+<div class="underline"></div>
 
 <style>
+	.underline {
+		content: "";
+		display: block;
+		width: 50vw;
+		height: 2px;
+		background: linear-gradient(90deg, transparent, #374151, transparent);
+		margin: 1.5rem auto;
+	}
 	.project-card {
 		display: flex;
 		opacity: 0;
-		flex-direction: column;
+		flex-direction: row;
+		gap: 1.5rem;
 		transform: translateX(-150px);
-		border: 1px solid #ccc;
-		padding: 1.6rem;
-		max-width: 300px;
-		min-height: 350px;
-		border-radius: 8px;
-		background: rgb(9, 9, 38);
-		border-color: rgb(9, 9, 38);
-		transition: transform 0.6s ease-out;
+		padding: 1.5rem;
+		width: 600px;
+		min-height: 180px;
+		border-radius: 16px;
+		position: relative;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		box-shadow:
+			0 8px 32px rgba(0, 0, 0, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		transition:
+			transform 0.6s ease-out,
+			box-shadow 0.3s ease,
+			background 0.3s ease;
+	}
+	.project-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.1) 0%,
+			rgba(255, 255, 255, 0.05) 50%,
+			rgba(255, 255, 255, 0.02) 100%
+		);
+		pointer-events: none;
+		border-radius: 16px;
+	}
+
+	.project-card:hover {
+		transform: translateY(-4px);
+		box-shadow:
+			0 16px 64px rgba(0, 0, 0, 0.4),
+			inset 0 1px 0 rgba(255, 255, 255, 0.3);
+		background: rgba(255, 255, 255, 0.12);
+	}
+
+	.project-card img {
+		flex-shrink: 0;
+		object-fit: cover;
+		border-radius: 12px;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		position: relative;
+		z-index: 1;
 	}
 
 	.project-card-content {
-		margin-top: 1rem;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		z-index: 1;
 	}
 
 	.project-card.reveal {
@@ -71,32 +128,36 @@ const { image, title, link, github, content, subContent } = Astro.props;
 		transform: translateX(0);
 		transition:
 			opacity 0.6s ease-out,
-			transform 0.8s ease-out;
+			transform 0.8s ease-out,
+			box-shadow 0.3s ease,
+			background 0.3s ease;
+	}
+
+	.truncate {
+		display: inline-block;
+		max-width: 320px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	@media (max-width: 640px) {
+		.project-card {
+			flex-direction: column;
+			max-width: 300px;
+			padding: 1.25rem;
+			backdrop-filter: blur(16px);
+			-webkit-backdrop-filter: blur(16px);
+		}
+
+		.project-card img {
+			width: 100%;
+			height: auto;
+			max-height: 200px;
+		}
+
+		.truncate {
+			max-width: 240px;
+		}
 	}
 </style>
-
-<script>
-	document.addEventListener("astro:page-load", () => {
-		const cards = document.querySelectorAll(".project-card");
-
-		cards.forEach((cardEl: any) => {
-			cardEl.addEventListener("mousemove", (e: any) => {
-				if (!cardEl.classList.contains("reveal")) return;
-				const rect = cardEl.getBoundingClientRect();
-				const x = e.clientX - rect.left;
-				const y = e.clientY - rect.top;
-				const centerX = rect.width / 2;
-				const centerY = rect.height / 2;
-
-				// Calculate rotation angles based on mouse position
-				const rotateX = ((y - centerY) / centerY) * 25; // control the strength of the effect
-				const rotateY = ((x - centerX) / centerX) * -25; // control the strength of the effect
-				cardEl.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-			});
-
-			cardEl.addEventListener("mouseleave", () => {
-				cardEl.style.transform = "rotateX(0deg) rotateY(0deg)";
-			});
-		});
-	});
-</script>

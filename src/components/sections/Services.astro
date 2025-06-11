@@ -1,0 +1,41 @@
+---
+import Card from "../Astro/Card.astro";
+---
+
+<section class="mb-28" id="services">
+	<div class="card-container">
+		<Card title="Web Developer" image="/svg/code.svg" />
+		<Card title="Backend Developer" image="/svg/server.svg" />
+		<Card title="Frontend Developer" image="/svg/browser.svg" />
+		<Card title="Software Developer" image="/svg/gear.svg" />
+	</div>
+</section>
+
+<style>
+	.card-container {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+		width: 100%;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	@media (max-width: 400px) {
+		.card-container {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (min-width: 401px) and (max-width: 650px) {
+		.card-container {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 650px) {
+		.card-container {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+</style>

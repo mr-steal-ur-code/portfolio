@@ -23,12 +23,288 @@ const { title } = Astro.props;
 	<ClientRouter />
 	<body>
 		<Header />
+		<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+			<span aria-hidden="true">TOP</span>
+		</button>
 		<div
 			class="pt-28 text-slate-400 font-semibold w-full mx-auto max-w-[70rem] sm:px-4 md:px-8 flex-1"
 		>
 			<slot />
 		</div>
 	</body>
+
+	<style is:global>
+		body {
+			overflow-x: hidden;
+		}
+		.back-to-top {
+			background: none;
+			border: none;
+			padding: 0;
+			margin: 0;
+			font: inherit;
+			color: inherit;
+			appearance: none;
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			width: 0;
+			height: 0;
+			border-left: 3.5rem solid transparent;
+			border-bottom: 3.5rem solid #e63946;
+			cursor: pointer;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.5s ease-in;
+			z-index: 11110;
+			-webkit-tap-highlight-color: transparent;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			user-select: none;
+		}
+
+		.back-to-top.visible {
+			opacity: 1;
+			pointer-events: all;
+		}
+
+		.back-to-top span {
+			position: absolute;
+			bottom: -2.7rem;
+			right: 0.2rem;
+			color: white;
+			font-size: 0.8rem;
+			font-weight: bold;
+			transform: rotate(-45deg);
+			z-index: 11111;
+			letter-spacing: 2px;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		.title {
+			margin: 4rem auto;
+			text-align: center;
+			padding: 1rem;
+			text-transform: uppercase;
+			font-size: clamp(1.8rem, 4vw, 3.2rem);
+			font-weight: 900;
+			letter-spacing: 0.2em;
+			font-family: "Orbitron", "Courier New", monospace;
+			color: #ffffff;
+			text-shadow:
+				0 0 3px #0084ff,
+				0 0 8px #0084ff,
+				0 0 15px #bf00ff,
+				0 0 30px #bf00ff,
+				0 0 50px #bf00ff;
+			background: linear-gradient(
+				45deg,
+				rgba(0, 132, 255, 0.05),
+				rgba(191, 0, 255, 0.05),
+				rgba(0, 255, 255, 0.05)
+			);
+			border: 1px solid transparent;
+			border-radius: 12px;
+			position: relative;
+			overflow: hidden;
+			animation:
+				neonPulse 3s ease-in-out infinite alternate,
+				borderGlow 4s linear infinite,
+				textShimmer 6s ease-in-out infinite;
+			width: 100%;
+			box-sizing: border-box;
+			transform-style: preserve-3d;
+		}
+
+		.title::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(
+				90deg,
+				transparent,
+				rgba(0, 255, 255, 0.3),
+				rgba(191, 0, 255, 0.2),
+				rgba(0, 132, 255, 0.3),
+				transparent
+			);
+			animation: neonSweep 4s linear infinite;
+			z-index: 1;
+		}
+
+		.title::after {
+			content: "";
+			position: absolute;
+			top: -2px;
+			left: -2px;
+			right: -2px;
+			bottom: -2px;
+			background: linear-gradient(
+				45deg,
+				#0084ff,
+				#bf00ff,
+				#00ffff,
+				#ff0080,
+				#0084ff
+			);
+			border-radius: 14px;
+			z-index: -1;
+			animation: borderRotate 10s linear infinite;
+			opacity: 0.6;
+		}
+
+		@keyframes neonSweep {
+			0% {
+				left: -120%;
+				transform: skewX(-20deg);
+			}
+			100% {
+				left: 120%;
+				transform: skewX(-20deg);
+			}
+		}
+
+		@keyframes neonPulse {
+			0% {
+				text-shadow:
+					0 0 3px #0084ff,
+					0 0 8px #0084ff,
+					0 0 15px #bf00ff,
+					0 0 30px #bf00ff,
+					0 0 50px #bf00ff;
+				transform: scale(1) rotateX(0deg);
+			}
+			50% {
+				text-shadow:
+					0 0 6px #00ffff,
+					0 0 12px #0084ff,
+					0 0 20px #bf00ff,
+					0 0 40px #ff0080,
+					0 0 60px #bf00ff,
+					0 0 80px #0084ff;
+				transform: scale(1.02) rotateX(2deg);
+			}
+			100% {
+				text-shadow:
+					0 0 4px #0084ff,
+					0 0 10px #bf00ff,
+					0 0 18px #00ffff,
+					0 0 35px #bf00ff,
+					0 0 55px #0084ff;
+				transform: scale(1) rotateX(0deg);
+			}
+		}
+
+		@keyframes borderGlow {
+			0%,
+			100% {
+				box-shadow:
+					0 0 10px rgba(0, 132, 255, 0.5),
+					inset 0 0 10px rgba(191, 0, 255, 0.1);
+			}
+			25% {
+				box-shadow:
+					0 0 20px rgba(191, 0, 255, 0.6),
+					inset 0 0 15px rgba(0, 255, 255, 0.1);
+			}
+			50% {
+				box-shadow:
+					0 0 15px rgba(0, 255, 255, 0.7),
+					inset 0 0 20px rgba(0, 132, 255, 0.1);
+			}
+			75% {
+				box-shadow:
+					0 0 25px rgba(255, 0, 128, 0.5),
+					inset 0 0 10px rgba(191, 0, 255, 0.1);
+			}
+		}
+
+		@keyframes borderRotate {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@keyframes textShimmer {
+			0%,
+			100% {
+				letter-spacing: 0.2em;
+			}
+			50% {
+				letter-spacing: 0.25em;
+			}
+		}
+	</style>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const elements = {
+				headerTopBtn: document.getElementById("header-top-btn"),
+				backToTopButton: document.getElementById("back-to-top"),
+				menuButton: document.getElementById("menu-button"),
+				mobileMenu: document.getElementById("mobile-menu"),
+				header: document.getElementById("header"),
+			};
+
+			const SCROLL_OPTIONS = {
+				BACK_TO_TOP: 300,
+				HEADER_CHANGE: 5,
+			};
+
+			const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+			const toggleMobileMenu = (menu: HTMLElement) => {
+				const isOpen = menu.classList.contains("show-menu");
+
+				menu.classList.toggle("show-menu", !isOpen);
+				requestAnimationFrame(() => {
+					menu.style.maxHeight = isOpen ? "0" : `${menu.scrollHeight}px`;
+				});
+			};
+
+			const handleScroll = () => {
+				const scrollY = window.scrollY;
+
+				elements.backToTopButton?.classList.toggle(
+					"visible",
+					scrollY > SCROLL_OPTIONS.BACK_TO_TOP
+				);
+
+				if (elements.header) {
+					if (scrollY > SCROLL_OPTIONS.HEADER_CHANGE) {
+						elements.header.classList.add("scrolled");
+					} else {
+						elements.header.classList.remove("scrolled");
+					}
+				}
+			};
+
+			window.addEventListener("scroll", handleScroll, { passive: true });
+
+			elements.menuButton?.addEventListener("click", (e) => {
+				e.stopPropagation();
+				if (elements.mobileMenu) toggleMobileMenu(elements.mobileMenu);
+			});
+
+			elements.mobileMenu?.addEventListener("click", (e) => {
+				if (!elements.mobileMenu) return;
+				const target = e.target as HTMLElement | null;
+				if (target?.tagName.toLowerCase() === "a") {
+					toggleMobileMenu(elements.mobileMenu);
+				}
+			});
+
+			[elements.headerTopBtn, elements.backToTopButton].forEach((btn) =>
+				btn?.addEventListener("click", scrollToTop)
+			);
+		});
+	</script>
 
 
 </html>

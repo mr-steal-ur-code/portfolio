@@ -9,35 +9,35 @@ const links = [
 ];
 ---
 
-<header id="header" class="shadow fixed top-0 w-full z-50">
+<header
+	id="header"
+	class="shadow fixed top-0 w-[100vw] z-50 p-2 transition-all duration-300 ease-in-out"
+>
 	<div class="pr-4 mx-auto flex justify-between items-center">
 		<div class="text-2xl font-bold text-white" title="top">
-			<p data-id="top" class="text-white p-1 cursor-pointer">
+			<a id="header-top-btn" class="text-white p-1 cursor-pointer">
 				<img
-					data-id="top"
-					class="inline-block bg-slate-700 rounded-full"
-					height="80px"
-					width="70px"
+					class="avatar inline-block bg-slate-700 rounded-full"
 					src="/avatar-200.png"
 				/>
 				Portfolio
-			</p>
+			</a>
 		</div>
 		<nav class="hidden md:flex space-x-6">
 			{
 				links?.map?.((link) => (
-					<p
+					<a
+						href={`#${link.id}`}
 						title={link.id}
 						class="cursor-pointer text-slate-400 font-medium text-lg hover:text-white hover:underline transition-all duration-300"
-						data-id={link?.id}
 					>
-						{link?.name}
-					</p>
+						{link.name}
+					</a>
 				))
 			}
 		</nav>
 		<div class="md:hidden">
-			<button id="menu-button" class="text-white focus:outline-none">
+			<button id="menu-button" class="text-white">
 				<svg
 					class="w-6 h-6"
 					fill="none"
@@ -54,88 +54,180 @@ const links = [
 			</button>
 		</div>
 	</div>
-	<div id="mobile-menu" class="flex flex-col text-xl bg-slate-950 md:hidden">
+	<div
+		id="mobile-menu"
+		class="flex flex-col text-xl bg-slate-950 md:hidden m-auto"
+	>
 		{
 			links?.map?.((link) => (
-				<p
+				<a
+					href={`#${link.id}`}
 					title={link.id}
-					class="cursor-pointer p-2 text-white font-medium hover:text-slate-800"
-					data-id={link?.id}
+					class="mobile-menu-link cursor-pointer p-2 text-white font-medium hover:text-slate-800"
+					data-id={link.id}
 				>
-					{link?.name}
-				</p>
+					{link.name}
+				</a>
 			))
 		}
 	</div>
 </header>
 
-<script>
-	document.addEventListener("astro:page-load", () => {
-		const menuButton = document.getElementById("menu-button");
-		const mobileMenu = document.getElementById("mobile-menu");
-		const toTopButton = document.getElementById("toTopButton");
-
-		menuButton?.addEventListener("click", () => {
-			if (mobileMenu) {
-				if (mobileMenu.classList.contains("show")) {
-					mobileMenu.style.maxHeight = "0";
-					mobileMenu.classList.remove("show");
-				} else {
-					mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-					mobileMenu.classList.add("show");
-				}
-			}
-		});
-		document.addEventListener("scroll", () => {
-			const header = document.getElementById("header");
-			if (window.scrollY > 5 && header) {
-				toTopButton?.classList.add("show");
-				header.classList.add("bg-slate-950");
-				header.classList.remove("py-4");
-			} else {
-				toTopButton?.classList.remove("show");
-				header?.classList.remove("bg-slate-950");
-				header?.classList.add("py-4");
-			}
-		});
-		document.addEventListener("click", (e: any) => {
-			if (e?.target?.dataset?.id) {
-				if (e?.target?.dataset?.id === "top") {
-					scrollTo({ top: 0, behavior: "smooth" });
-				} else {
-					scrollToElement(e?.target?.dataset?.id);
-				}
-				if (mobileMenu && mobileMenu.classList.contains("show")) {
-					mobileMenu.style.maxHeight = "0";
-					mobileMenu.classList.remove("show");
-				}
-			}
-		});
-		function scrollToElement(id: string) {
-			var element = document.getElementById(id);
-			if (element) {
-				element.scrollIntoView({ behavior: "smooth" });
-			}
-		}
-	});
-</script>
-
 <style>
 	#header {
+		background: transparent;
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		box-shadow:
+			0 8px 32px rgba(0, 0, 0, 0.12),
+			inset 0 1px 0 rgba(255, 255, 255, 0.15);
 		transition:
-			background 0.5s ease,
-			padding 0.5s ease;
-	}
-	#mobile-menu {
-		max-height: 0;
-		overflow: hidden;
-		transition:
-			max-height 0.4s ease-out,
-			opacity 0.3s ease-out;
-		opacity: 0;
+			background 0.3s ease,
+			height 0.3s ease;
+		height: 80px;
 	}
 
-	#mobile-menu.show {
+	#header.scrolled {
+		background: rgba(255, 255, 255, 0.08);
+		height: 60px;
+	}
+
+	.avatar {
+		height: 70px;
+		width: 70px;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		will-change: height, width;
+	}
+
+	#header.scrolled div div a .avatar {
+		width: 40px;
+		height: 40px;
+	}
+	.nav-link {
+		position: relative;
+		padding: 8px 16px;
+		border-radius: 12px;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.nav-link:hover {
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		box-shadow:
+			0 4px 16px rgba(0, 0, 0, 0.1),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+	}
+
+	.menu-btn {
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(15px);
+		-webkit-backdrop-filter: blur(15px);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 12px;
+		box-shadow:
+			0 4px 16px rgba(0, 0, 0, 0.1),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+	}
+
+	.menu-btn:hover {
+		background: rgba(255, 255, 255, 0.15);
+		transform: scale(1.05);
+		box-shadow:
+			0 6px 20px rgba(0, 0, 0, 0.15),
+			inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	}
+
+	#mobile-menu {
+		max-height: 0;
+		opacity: 0;
+		overflow: hidden;
+		background: rgba(15, 23, 42, 0.15);
+		backdrop-filter: blur(25px);
+		-webkit-backdrop-filter: blur(25px);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-top: none;
+		box-shadow:
+			0 12px 40px rgba(0, 0, 0, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		transition:
+			max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	#mobile-menu::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.08) 0%,
+			rgba(255, 255, 255, 0.04) 50%,
+			rgba(255, 255, 255, 0.02) 100%
+		);
+		pointer-events: none;
+	}
+
+	#mobile-menu.show-menu {
 		opacity: 1;
+		max-height: 400px;
+	}
+
+	.mobile-menu-link {
+		display: block;
+		text-align: right;
+		padding: 16px 20px;
+		width: 100%;
+		position: relative;
+		z-index: 1;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		background: transparent;
+		margin: 4px 8px;
+		border-radius: 12px;
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	.mobile-menu-link:hover {
+		background: rgba(255, 255, 255, 0.12);
+		backdrop-filter: blur(15px);
+		-webkit-backdrop-filter: blur(15px);
+		box-shadow:
+			0 4px 16px rgba(0, 0, 0, 0.1),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+	}
+
+	.mobile-menu-link:last-child {
+		border-bottom: none;
+		margin-bottom: 8px;
+	}
+
+	#mobile-menu.show-menu .mobile-menu-link {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	#mobile-menu.show-menu .mobile-menu-link:nth-child(1) {
+		transition-delay: 0.1s;
+	}
+	#mobile-menu.show-menu .mobile-menu-link:nth-child(2) {
+		transition-delay: 0.15s;
+	}
+	#mobile-menu.show-menu .mobile-menu-link:nth-child(3) {
+		transition-delay: 0.2s;
+	}
+	#mobile-menu.show-menu .mobile-menu-link:nth-child(4) {
+		transition-delay: 0.25s;
+	}
+	#mobile-menu.show-menu .mobile-menu-link:nth-child(5) {
+		transition-delay: 0.3s;
+	}
+	#mobile-menu.show-menu .mobile-menu-link:nth-child(6) {
+		transition-delay: 0.35s;
 	}
 </style>
