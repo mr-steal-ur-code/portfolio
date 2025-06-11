@@ -1,10 +1,9 @@
 ---
 const links = [
+	{ name: "Projects", id: "projects" },
 	{ name: "Education", id: "education" },
-	{ name: "Work", id: "work" },
 	{ name: "Certifications", id: "certifications" },
 	{ name: "Skills", id: "skills" },
-	{ name: "Projects", id: "projects" },
 	{ name: "Contact", id: "contact" },
 ];
 ---
@@ -39,7 +38,7 @@ const links = [
 		<div class="md:hidden">
 			<button id="menu-button" class="text-white">
 				<svg
-					class="w-6 h-6"
+					class="w-8 h-8"
 					fill="none"
 					stroke="currentColor"
 					viewBox="0 0 24 24"
@@ -76,8 +75,7 @@ const links = [
 <style>
 	#header {
 		background: transparent;
-		backdrop-filter: blur(20px);
-		-webkit-backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(10px);
 		box-shadow:
 			0 8px 32px rgba(0, 0, 0, 0.12),
 			inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -88,8 +86,8 @@ const links = [
 	}
 
 	#header.scrolled {
-		background: rgba(255, 255, 255, 0.08);
-		height: 60px;
+		background: rgba(0, 0, 0, 0.6);
+		height: 54px;
 	}
 
 	.avatar {
@@ -119,40 +117,16 @@ const links = [
 			inset 0 1px 0 rgba(255, 255, 255, 0.2);
 	}
 
-	.menu-btn {
-		background: rgba(255, 255, 255, 0.1);
-		backdrop-filter: blur(15px);
-		-webkit-backdrop-filter: blur(15px);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 12px;
-		box-shadow:
-			0 4px 16px rgba(0, 0, 0, 0.1),
-			inset 0 1px 0 rgba(255, 255, 255, 0.2);
-	}
-
-	.menu-btn:hover {
-		background: rgba(255, 255, 255, 0.15);
-		transform: scale(1.05);
-		box-shadow:
-			0 6px 20px rgba(0, 0, 0, 0.15),
-			inset 0 1px 0 rgba(255, 255, 255, 0.3);
-	}
-
 	#mobile-menu {
 		max-height: 0;
-		opacity: 0;
 		overflow: hidden;
-		background: rgba(15, 23, 42, 0.15);
+		background: rgba(15, 23, 42, 0.9);
 		backdrop-filter: blur(25px);
 		-webkit-backdrop-filter: blur(25px);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-top: none;
 		box-shadow:
 			0 12px 40px rgba(0, 0, 0, 0.2),
 			inset 0 1px 0 rgba(255, 255, 255, 0.1);
-		transition:
-			max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-			opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	#mobile-menu::before {
@@ -172,20 +146,20 @@ const links = [
 	}
 
 	#mobile-menu.show-menu {
-		opacity: 1;
 		max-height: 400px;
 	}
 
 	.mobile-menu-link {
 		display: block;
-		text-align: right;
-		padding: 16px 20px;
+		text-align: left;
+		padding: 1rem 2rem 1rem 75%;
 		width: 100%;
 		position: relative;
 		z-index: 1;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		background: transparent;
+		color: #c2c0c0;
 		margin: 4px 8px;
 		border-radius: 12px;
 		opacity: 0;
@@ -194,12 +168,12 @@ const links = [
 
 	.mobile-menu-link:hover {
 		background: rgba(255, 255, 255, 0.12);
+		color: #fff;
 		backdrop-filter: blur(15px);
 		-webkit-backdrop-filter: blur(15px);
 		box-shadow:
 			0 4px 16px rgba(0, 0, 0, 0.1),
 			inset 0 1px 0 rgba(255, 255, 255, 0.2);
-		border: 1px solid rgba(255, 255, 255, 0.2);
 	}
 
 	.mobile-menu-link:last-child {
@@ -212,22 +186,9 @@ const links = [
 		transform: translateY(0);
 	}
 
-	#mobile-menu.show-menu .mobile-menu-link:nth-child(1) {
-		transition-delay: 0.1s;
-	}
-	#mobile-menu.show-menu .mobile-menu-link:nth-child(2) {
-		transition-delay: 0.15s;
-	}
-	#mobile-menu.show-menu .mobile-menu-link:nth-child(3) {
-		transition-delay: 0.2s;
-	}
-	#mobile-menu.show-menu .mobile-menu-link:nth-child(4) {
-		transition-delay: 0.25s;
-	}
-	#mobile-menu.show-menu .mobile-menu-link:nth-child(5) {
-		transition-delay: 0.3s;
-	}
-	#mobile-menu.show-menu .mobile-menu-link:nth-child(6) {
-		transition-delay: 0.35s;
+	@media (max-width: 550px) {
+		.mobile-menu-link {
+			padding: 1rem 2rem 1rem 55%;
+		}
 	}
 </style>

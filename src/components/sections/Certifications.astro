@@ -2,83 +2,276 @@
 
 ---
 
-<section class="min-h-[70vh] fade-in pb-12" id="certifications">
+<section class="certifications fade-in" id="certifications">
 	<h2 class="title">Certifications</h2>
-	<div>
-		<div>
-			<p class="text-lg text-white">
+	<div class="cert-grid">
+		<div class="cert-card">
+			<p class="cert-title">
 				Professional Certificate in Full Stack Software Development
 			</p>
-			<small>MERN stack node and AWS</small>
-			<ul class="pl-8 py-2 list-disc">
+			<small class="cert-subtitle">MERN stack node and AWS</small>
+			<ul class="cert-description">
 				<li>
 					Demonstrates expertise in developing full stack applications using the
-					MERN stack (MongoDB, Express, React, Node.js
+					MERN stack (MongoDB, Express, React, Node.js)
 				</li>
 			</ul>
-			<small class="block pt-4">July 2024</small>
-			<a
-				class="inline-block text-orange-400 hover:text-purple-400 duration-300 transition-all"
-				target="_blank"
-				href="/certs/full-stack-cert.jpg">View Certification</a
-			>
+			<small class="cert-date">July 2024</small>
+			<a class="cert-link" target="_blank" href="/certs/full-stack-cert.jpg">
+				View Certification
+			</a>
 		</div>
 
-		<div>
-			<p class="text-lg text-white">FreeCodeCamp Certifications</p>
-			<ul class="pl-8 py-2 list-disc">
-				<li class="pb-2">
-					<span class="text-white">Responsive Web Design</span>
-					<small class="block">September 2024</small>
+		<div class="cert-card freecodecamp-cert">
+			<p class="cert-title">FreeCodeCamp Certifications</p>
+			<div class="cert-description">
+				<div class="sub-cert">
+					<span class="sub-cert-title">Responsive Web Design</span>
+					<small class="sub-cert-date">September 2024</small>
 					<a
-						class="block text-orange-400 text-md hover:text-purple-400 duration-300 transition-all"
+						class="sub-cert-link"
 						target="_blank"
-						href="/certs/free_code_camp_web.jpg">View Certification</a
+						href="/certs/free_code_camp_web.jpg"
 					>
-				</li>
-				<li class="pb-2">
-					<span class="text-white"
+						View Certification →
+					</a>
+				</div>
+				<div class="sub-cert">
+					<span class="sub-cert-title"
 						>JavaScript Algorithms and Data Structures</span
 					>
-					<small class="block">September 2024</small>
+					<small class="sub-cert-date">September 2024</small>
 					<a
-						class="block text-orange-400 text-md hover:text-purple-400 duration-300 transition-all"
+						class="sub-cert-link"
 						target="_blank"
-						href="/certs/free_code_camp_js.png">View Certification</a
+						href="/certs/free_code_camp_js.png"
 					>
-				</li>
-			</ul>
+						View Certification →
+					</a>
+				</div>
+			</div>
 		</div>
 
-		<div>
-			<p class="text-lg text-white">Net+</p><small>CompTIA</small>
-			<ul class="pl-8 py-2 list-disc">
+		<div class="cert-card">
+			<p class="cert-title">Net+</p>
+			<small class="cert-subtitle">CompTIA</small>
+			<ul class="cert-description">
 				<li>
 					Strong foundation in networking concepts, including network
 					configuration, management, and troubleshooting.
 				</li>
 			</ul>
-			<small class="block pt-4">March 2011</small>
-			<a
-				class="inline-block text-orange-400 hover:text-purple-400 duration-300 transition-all"
-				target="_blank"
-				href="/certs/net-plus.jpg">View Certification</a
-			>
+			<small class="cert-date">March 2011</small>
+			<a class="cert-link" target="_blank" href="/certs/net-plus.jpg">
+				View Certification
+			</a>
 		</div>
-		<div>
-			<p class="text-lg text-white">A+</p><small>CompTIA</small>
-			<ul class="pl-8 py-2 list-disc">
+
+		<div class="cert-card">
+			<p class="cert-title">A+</p>
+			<small class="cert-subtitle">CompTIA</small>
+			<ul class="cert-description">
 				<li>
 					Validates comprehensive skills in IT hardware and software, including
 					installation, configuration, and support.
 				</li>
 			</ul>
-			<small class="block pt-4">March 2011</small>
-			<a
-				class="inline-block text-orange-400 hover:text-purple-400 duration-300 transition-all"
-				target="_blank"
-				href="/certs/a-plus.jpg">View Certification</a
-			>
+			<small class="cert-date">March 2011</small>
+			<a class="cert-link" target="_blank" href="/certs/a-plus.jpg">
+				View Certification
+			</a>
 		</div>
 	</div>
 </section>
+
+<style>
+	.certifications {
+		min-height: 70vh;
+		padding-bottom: 3rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.title {
+		font-size: 3rem;
+		font-weight: 700;
+		text-align: center;
+		margin-bottom: 3rem;
+		color: white;
+		text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	}
+
+	.cert-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		gap: 2rem;
+	}
+
+	.cert-card {
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 20px;
+		padding: 2rem;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.cert-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(255, 255, 255, 0.4),
+			transparent
+		);
+	}
+
+	.cert-card:hover {
+		transform: translateY(-8px);
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+	}
+
+	.cert-title {
+		font-size: 1.25rem;
+		color: white;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.cert-subtitle {
+		color: rgba(255, 255, 255, 0.8);
+		font-size: 0.9rem;
+		margin-bottom: 1rem;
+		font-weight: 500;
+	}
+
+	.cert-description {
+		list-style: none;
+		padding: 0;
+		margin: 1rem 0;
+	}
+
+	.cert-description li {
+		color: rgba(255, 255, 255, 0.9);
+		line-height: 1.6;
+		padding: 0.5rem 0;
+		position: relative;
+		padding-left: 1.5rem;
+	}
+
+	.cert-description li::before {
+		content: "▸";
+		position: absolute;
+		left: 0;
+		color: rgba(255, 165, 0, 0.8);
+		font-weight: bold;
+	}
+
+	.cert-date {
+		display: block;
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 0.85rem;
+		margin-top: 1.5rem;
+		margin-bottom: 1rem;
+		font-weight: 500;
+	}
+
+	.cert-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: #ff9500;
+		text-decoration: none;
+		font-weight: 500;
+		padding: 0.75rem 1.5rem;
+		background: rgba(255, 149, 0, 0.1);
+		border: 1px solid rgba(255, 149, 0, 0.3);
+		border-radius: 50px;
+		transition: all 0.3s ease;
+		backdrop-filter: blur(10px);
+	}
+
+	.cert-link:hover {
+		color: #a855f7;
+		background: rgba(168, 85, 247, 0.1);
+		border-color: rgba(168, 85, 247, 0.3);
+		transform: translateX(4px);
+	}
+
+	.cert-link::after {
+		content: "→";
+		transition: transform 0.3s ease;
+	}
+
+	.cert-link:hover::after {
+		transform: translateX(4px);
+	}
+
+	.freecodecamp-cert {
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	.freecodecamp-cert .cert-description {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.sub-cert {
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 12px;
+		padding: 1.5rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.sub-cert-title {
+		color: white;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.sub-cert-date {
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 0.85rem;
+		margin-bottom: 1rem;
+	}
+
+	.sub-cert-link {
+		color: #ff9500;
+		text-decoration: none;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.sub-cert-link:hover {
+		color: #a855f7;
+		transform: translateX(2px);
+	}
+
+	@media (max-width: 768px) {
+		.cert-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.title {
+			font-size: 2.5rem;
+		}
+
+		.cert-card {
+			padding: 1.5rem;
+		}
+	}
+</style>

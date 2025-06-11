@@ -2,7 +2,7 @@
 
 ---
 
-<section class="xs:pt-4 md:pt-12 fade-in pb-36" id="intro">
+<section class="overflow-x-hidden xs:pt-4 md:pt-12 fade-in pb-36" id="intro">
 	<div class="flex flex-row justify-evenly text-center text-white gap-4">
 		<a
 			class="modern-btn resume-btn opacity-0 translate-y-8"
@@ -272,44 +272,30 @@
 </style>
 
 <script>
-	const introSection = document.getElementById("intro") || null;
+	document.addEventListener("astro:page-load", () => {
+		const buttons = document.querySelectorAll<HTMLButtonElement>(".modern-btn");
+		const paragraphs =
+			document.querySelectorAll<HTMLParagraphElement>(".paragraph-animate");
+		const allElements: HTMLElement[] = [...buttons, ...paragraphs];
 
-	if (introSection) {
-		introSection.addEventListener(
-			"transitionend",
-			(event) => {
-				if (
-					event.propertyName === "opacity" ||
-					event.propertyName === "transform"
-				) {
-					const buttons =
-						document.querySelectorAll<HTMLButtonElement>(".modern-btn");
-					const paragraphs =
-						document.querySelectorAll<HTMLParagraphElement>(
-							".paragraph-animate"
-						);
-					const allElements: HTMLElement[] = [...buttons, ...paragraphs];
+		const observerOptions = {
+			threshold: 0.1,
+			rootMargin: "50px 0px 0px 0px",
+		};
 
-					const observerOptions = {
-						threshold: 0.1,
-						rootMargin: "0px 0px -50px 0px",
-					};
-
-					const activeObserver = new IntersectionObserver((entries) => {
-						entries.forEach((entry) => {
-							if (entry.isIntersecting) {
-								entry.target.classList.add("active");
-							}
-						});
-					}, observerOptions);
-
-					allElements.forEach((element, index) => {
-						element.style.transitionDelay = `${index * 0.3}s`;
-						activeObserver.observe(element);
-					});
+		const activeObserver = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("active");
 				}
-			},
-			{ once: true }
-		);
-	}
+			});
+		}, observerOptions);
+
+		allElements.forEach((element, index) => {
+			element.style.transitionDelay = `${index * 0.5}s`;
+			setTimeout(() => {
+				activeObserver.observe(element);
+			}, 500);
+		});
+	});
 </script>

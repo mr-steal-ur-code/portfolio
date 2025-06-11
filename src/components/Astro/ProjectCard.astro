@@ -17,30 +17,29 @@ const { image, title, link, github, content, subContent } = Astro.props;
 		{title && <h2 class="text-lg text-white">{title}</h2>}
 		{
 			link && (
-				<div class="py-2">
-					{link && (
-						<a
-							class="truncate text-sm underline underline-offset-2"
-							target="_blank"
-							href={link}
-						>
-							{link}
-						</a>
-					)}
-					{github ? (
-						<a
-							class="mt-2 truncate text-sm underline underline-offset-2"
-							target="_blank"
-							href={github}
-						>
-							{github}
-						</a>
-					) : (
-						<h3 class="text-red-400">Private Repo</h3>
-					)}
-				</div>
+				<a
+					class="text-sm underline underline-offset-2"
+					target="_blank"
+					href={link}
+				>
+					Live Site
+				</a>
 			)
 		}
+		{
+			github && github.trim() !== "" ? (
+				<a
+					class="mt-2 text-sm underline underline-offset-2 block"
+					target="_blank"
+					href={github}
+				>
+					GitHub Repo
+				</a>
+			) : (
+				<h3 class="text-red-400">Private Repo</h3>
+			)
+		}
+
 		{content && <p class="pt-4 text-sm">{content}</p>}
 		{subContent && <p class="text-blue-500 pt-2">{subContent}</p>}
 	</div>
@@ -48,6 +47,14 @@ const { image, title, link, github, content, subContent } = Astro.props;
 <div class="underline"></div>
 
 <style>
+	.project-card-content a {
+		color: #3b82f6;
+		font-size: 1rem;
+		transition: color 0.3s ease;
+	}
+	.project-card-content a:hover {
+		color: #0e4cd2;
+	}
 	.underline {
 		content: "";
 		display: block;
@@ -133,14 +140,6 @@ const { image, title, link, github, content, subContent } = Astro.props;
 			background 0.3s ease;
 	}
 
-	.truncate {
-		display: inline-block;
-		max-width: 320px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
 	@media (max-width: 640px) {
 		.project-card {
 			flex-direction: column;
@@ -154,10 +153,6 @@ const { image, title, link, github, content, subContent } = Astro.props;
 			width: 100%;
 			height: auto;
 			max-height: 200px;
-		}
-
-		.truncate {
-			max-width: 240px;
 		}
 	}
 </style>

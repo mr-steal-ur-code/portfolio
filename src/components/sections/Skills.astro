@@ -1,42 +1,288 @@
 ---
-const skills = [
-	"React",
-	"Typescript",
-	"JavaScript",
-	"Node",
-	"NextJs",
-	"Firebase",
-	"Tailwind",
-	"Mongo",
-	"StencilJs",
-	"Git",
-	"Stripe",
-	"Postmark",
-	"Jest",
-	"ViTest",
-	"SQL",
-	"Express",
-	"AWS",
-	"PWA",
-	"Astro",
+const skills: { [key: string]: number }[] = [
+	{ React: 4 },
+	{ Typescript: 4 },
+	{ JavaScript: 4 },
+	{ HTML: 4 },
+	{ CSS: 4 },
+	{ Firebase: 4 },
+	{ Express: 4 },
+	{ Node: 3 },
+	{ Git: 3 },
+	{ Astro: 3 },
+	{ StencilJs: 3 },
+	{ Yup: 3 },
+	{ Zod: 3 },
+	{ PWA: 2 },
+	{ NextJs: 2 },
+	{ Stripe: 2 },
+	{ Tailwind: 2 },
+	{ Postmark: 2 },
+	{ Phaser3: 2 },
+	{ Jest: 2 },
+	{ ViTest: 2 },
+	{ Redux: 2 },
+	{ Zustand: 2 },
+	{ Twilio: 2 },
+	{ GraphQL: 2 },
+	{ Mongo: 1 },
+	{ SQL: 1 },
+	{ AWS: 1 },
+	{ Python: 1 },
+	{ CSharp: 1 },
+	{ Unity: 1 },
+	{ Unreal: 1 },
 ];
+
+function getProficiencyClass(level: number) {
+	return (
+		["beginner", "intermediate", "advanced", "expert"][level - 1] || "beginner"
+	);
+}
+
+function getProficiencyLabel(level: number) {
+	return (
+		["Beginner", "Intermediate", "Advanced", "Expert"][level - 1] || "Beginner"
+	);
+}
 ---
 
-<section class="min-h-[70vh] fade-in" id="skills">
+<section class="fade-in" id="skills">
 	<h2 class="title">Skills</h2>
-	<div class="flex flex-wrap gap-8 justify-center max-w-[500px] m-auto">
-		{
-			skills.map((skill) => (
-				<div class="sm:p-2 md:p-4 skill-element">{skill}</div>
-			))
-		}
+	<div class="legend">
+		<div class="legend-item">
+			<div
+				class="legend-color"
+				style="background: linear-gradient(90deg, #10b981, #059669);"
+			>
+			</div>
+			<span class="legend-text">Expert</span>
+		</div>
+		<div class="legend-item">
+			<div
+				class="legend-color"
+				style="background: linear-gradient(90deg, #3b82f6, #1d4ed8);"
+			>
+			</div>
+			<span class="legend-text">Advanced</span>
+		</div>
+		<div class="legend-item">
+			<div
+				class="legend-color"
+				style="background: linear-gradient(90deg, #f59e0b, #d97706);"
+			>
+			</div>
+			<span class="legend-text">Intermediate</span>
+		</div>
+		<div class="legend-item">
+			<div
+				class="legend-color"
+				style="background: linear-gradient(90deg, #ef4444, #dc2626);"
+			>
+			</div>
+			<span class="legend-text">Beginner</span>
+		</div>
+		<div class="skills-grid">
+			{
+				skills.map((skillObj) => {
+					const name = Object.keys(skillObj)[0];
+					const level = skillObj[name];
+					const proficiencyClass = getProficiencyClass(level);
+					const proficiencyLabel = getProficiencyLabel(level);
+					return (
+						<div class={`skill-card ${proficiencyClass}`}>
+							<div class="skill-name">{name}</div>
+							<div class="skill-level" />
+							<div class="proficiency-badge">{proficiencyLabel}</div>
+						</div>
+					);
+				})
+			}
+		</div>
 	</div>
 </section>
 
-<style></style>
+<style>
+	.skills-grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		justify-content: center;
+	}
 
-<script>
-	document.addEventListener("astro:page-load", () => {
-		const skillElements = document.querySelectorAll(".skill-element");
-	});
-</script>
+	.skill-card {
+		position: relative;
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(15px);
+		-webkit-backdrop-filter: blur(15px);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 16px;
+		padding: 1.5rem 2rem;
+		width: 160px;
+		text-align: center;
+		cursor: pointer;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		overflow: hidden;
+	}
+
+	.skill-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(255, 255, 255, 0.4),
+			transparent
+		);
+	}
+
+	.skill-card:hover {
+		transform: translateY(-8px) scale(1.05);
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+	}
+
+	.skill-name {
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: white;
+		margin-bottom: 0.5rem;
+		position: relative;
+		z-index: 2;
+	}
+
+	.skill-level {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 4px;
+		border-radius: 0 0 16px 16px;
+		transition: all 0.4s ease;
+		z-index: 1;
+	}
+	.expert .skill-level {
+		width: 100%;
+		background: linear-gradient(90deg, #10b981, #059669);
+	}
+
+	.advanced .skill-level {
+		width: 85%;
+		background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+	}
+
+	.intermediate .skill-level {
+		width: 70%;
+		background: linear-gradient(90deg, #f59e0b, #d97706);
+	}
+
+	.beginner .skill-level {
+		width: 50%;
+		background: linear-gradient(90deg, #ef4444, #dc2626);
+	}
+
+	.expert:hover {
+		border-color: rgba(16, 185, 129, 0.5);
+		box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+	}
+
+	.advanced:hover {
+		border-color: rgba(59, 130, 246, 0.5);
+		box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+	}
+
+	.intermediate:hover {
+		border-color: rgba(245, 158, 11, 0.5);
+		box-shadow: 0 20px 40px rgba(245, 158, 11, 0.2);
+	}
+
+	.beginner:hover {
+		border-color: rgba(239, 68, 68, 0.5);
+		box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
+	}
+
+	.proficiency-badge {
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		padding: 0.25rem 0.75rem;
+		border-radius: 12px;
+		margin-top: 0.5rem;
+		display: inline-block;
+	}
+
+	.expert .proficiency-badge {
+		color: #10b981;
+		background: rgba(16, 185, 129, 0.1);
+		border: 1px solid rgba(16, 185, 129, 0.3);
+	}
+
+	.advanced .proficiency-badge {
+		color: #3b82f6;
+		background: rgba(59, 130, 246, 0.1);
+		border: 1px solid rgba(59, 130, 246, 0.3);
+	}
+
+	.intermediate .proficiency-badge {
+		color: #f59e0b;
+		background: rgba(245, 158, 11, 0.1);
+		border: 1px solid rgba(245, 158, 11, 0.3);
+	}
+
+	.beginner .proficiency-badge {
+		color: #ef4444;
+		background: rgba(239, 68, 68, 0.1);
+		border: 1px solid rgba(239, 68, 68, 0.3);
+	}
+
+	.legend {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		margin-top: 3rem;
+		flex-wrap: wrap;
+	}
+
+	.legend-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(10px);
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+	}
+
+	.legend-color {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+	}
+
+	.legend-text {
+		color: white;
+		font-size: 0.85rem;
+		font-weight: 500;
+	}
+
+	@media (max-width: 768px) {
+		.skills-grid {
+			gap: 1rem;
+		}
+
+		.skill-card {
+			min-width: 120px;
+			padding: 1rem 1.5rem;
+		}
+
+		.legend {
+			gap: 1rem;
+		}
+	}
+</style>
