@@ -13,22 +13,23 @@ const skills: { [key: string]: number }[] = [
 	{ StencilJs: 3 },
 	{ Yup: 3 },
 	{ Zod: 3 },
-	{ PWA: 2 },
-	{ NextJs: 2 },
-	{ Stripe: 2 },
-	{ Tailwind: 2 },
-	{ Postmark: 2 },
-	{ Phaser3: 2 },
+	{ SQL: 2 },
+	{ AWS: 2 },
+	{ Prisma: 2 },
 	{ Jest: 2 },
 	{ ViTest: 2 },
+	{ NextJs: 2 },
+	{ PWA: 2 },
+	{ Tailwind: 2 },
+	{ Stripe: 2 },
+	{ Postmark: 2 },
+	{ Phaser3: 2 },
 	{ Redux: 2 },
 	{ Zustand: 2 },
 	{ Twilio: 2 },
 	{ GraphQL: 2 },
+	{ Python: 2 },
 	{ Mongo: 1 },
-	{ SQL: 1 },
-	{ AWS: 1 },
-	{ Python: 1 },
 	{ CSharp: 1 },
 	{ Unity: 1 },
 	{ Unreal: 1 },
@@ -269,6 +270,16 @@ function getProficiencyLabel(level: number) {
 		color: white;
 		font-size: 0.85rem;
 		font-weight: 500;
+	}
+
+	@media (max-width: 370px) {
+		.skills-grid {
+			gap: 0.5rem !important;
+		}
+
+		.skill-card {
+			padding: 0.5rem 1rem !important;
+		}
 	}
 
 	@media (max-width: 768px) {
